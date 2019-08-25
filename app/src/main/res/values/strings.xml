@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GİthubReposMVVMJava</string>
+    <string name="hint_text">username</string>
+    <string name="submit">Submit</string>
 </resources>

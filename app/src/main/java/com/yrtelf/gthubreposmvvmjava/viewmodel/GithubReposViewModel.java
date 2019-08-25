@@ -1,5 +1,7 @@
 package com.yrtelf.gthubreposmvvmjava.viewmodel;
 
+import android.view.View;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
@@ -19,6 +21,7 @@ import retrofit2.Response;
 public class GithubReposViewModel extends ViewModel {
 
     private ObservableField<ArrayList<RepoResource>> repoResources = new ObservableField<>();
+    private ObservableField<String> username = new ObservableField<>();
     private ReposAdapter reposAdapter;
 
     public ObservableField<ArrayList<RepoResource>> getRepoResources() {
@@ -31,6 +34,14 @@ public class GithubReposViewModel extends ViewModel {
 
     public void setRepoResources(ArrayList<RepoResource> repoResources) {
         this.repoResources.set(repoResources);
+    }
+
+    public ObservableField<String> getUsername() {
+        return username;
+    }
+
+    public void setUsername(ObservableField<String> username) {
+        this.username = username;
     }
 
     public void setReposToAdapter(ArrayList<RepoResource> repoResources){
@@ -52,11 +63,11 @@ public class GithubReposViewModel extends ViewModel {
         return null;
     }
 
-    public void getRepos(){
+    public void getRepos(View view){
 
         NetworkInterface networkInterface = GithubApi.getRetrofitInstance().create(NetworkInterface.class);
 
-        Call<ArrayList<RepoResource>> call = networkInterface.getUserRepos();
+        Call<ArrayList<RepoResource>> call = networkInterface.getUserRepos(username.get());
 
         call.enqueue(new Callback<ArrayList<RepoResource>>() {
             @Override

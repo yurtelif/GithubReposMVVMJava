@@ -15,30 +15,48 @@
         tools:context=".GithubReposActivity">
 
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
+            android:hint="@string/hint_text"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColorHint="@color/colorPrimaryLight"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            android:id="@+id/textInputLayout">
 
-        <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@={viewModel.username}"
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_height="50dp"
+            android:text="@string/submit"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editText"
-            app:layout_constraintTop_toTopOf="@+id/editText" />
+            android:onClick="@{viewModel::getRepos}"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            tools:listitem="@layout/repos_list_item"
+            android:layout_marginTop="16dp"
             app:setAdapter="@{viewModel.getReposAdapter()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,8 +17,6 @@ import java.util.List;
 
 public class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.ViewHolder>  {
 
-
-
     private int layoutId;
     private List<RepoResource> repoResources;
     private GithubReposViewModel viewModel;
@@ -27,8 +25,6 @@ public class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.ViewHolder> 
         this.layoutId = layoutId;
         this.viewModel = viewModel;
     }
-
-    //android:text="@{viewModel.getRepoResourcesAt(position).name}"
 
     private int getLayoutIdForPosition(int position) {
         return layoutId;
