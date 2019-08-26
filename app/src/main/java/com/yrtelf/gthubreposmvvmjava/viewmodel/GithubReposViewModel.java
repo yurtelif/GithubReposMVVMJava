@@ -1,5 +1,6 @@
 package com.yrtelf.gthubreposmvvmjava.viewmodel;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.databinding.ObservableField;
@@ -10,6 +11,7 @@ import com.yrtelf.gthubreposmvvmjava.adapter.ReposAdapter;
 import com.yrtelf.gthubreposmvvmjava.model.RepoResource;
 import com.yrtelf.gthubreposmvvmjava.network.GithubApi;
 import com.yrtelf.gthubreposmvvmjava.network.NetworkInterface;
+import com.yrtelf.gthubreposmvvmjava.ui.DetailActivity;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class GithubReposViewModel extends ViewModel {
     private ObservableField<ArrayList<RepoResource>> repoResources = new ObservableField<>();
     private ObservableField<String> username = new ObservableField<>();
     private ReposAdapter reposAdapter;
+    private Context context;
 
     public ObservableField<ArrayList<RepoResource>> getRepoResources() {
         return repoResources;
@@ -49,6 +52,13 @@ public class GithubReposViewModel extends ViewModel {
         this.reposAdapter.notifyDataSetChanged();
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     public ReposAdapter getReposAdapter() {
         return reposAdapter;
@@ -82,6 +92,11 @@ public class GithubReposViewModel extends ViewModel {
             }
         });
 
+    }
+
+    public void onItemClick(Integer index) {
+        RepoResource repoResource = getRepoResourcesAt(index);
+        DetailActivity.startDetailActivity(getContext(),repoResource);
     }
 
 }
